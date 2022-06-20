@@ -13,19 +13,22 @@ class BankAccount {
     }
 
     getStatement() {
-        return Statement.printStatement(this.getTransactions())
+        const statement = new Statement()
+        return statement.printStatement(this.getTransactions())
     }
 
     credit(date, type, amount) {
+        const transaction = new Transaction()
         this.balance += amount
-        this.transactions.unshift(Transaction.deposit(date, type, amount, this.balance)) 
+        this.transactions.unshift(transaction.deposit(date, type, amount, this.balance)) 
         return this.balance
     }
 
     debit(date, type, amount) {
         if (amount < this.balance) {
+            const transaction = new Transaction()
             this.balance -= amount
-            this.transactions.unshift(Transaction.withdrawal(date, type, amount, this.balance))
+            this.transactions.unshift(transaction.withdrawal(date, type, amount, this.balance))
             return this.balance
         }
 

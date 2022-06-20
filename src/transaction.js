@@ -1,6 +1,6 @@
 class Transaction {
 
-    static deposit(date, type, amount, balance) {
+    deposit(date, type, amount, balance) {
         const transaction = {
             date: date,
             type: type,
@@ -10,7 +10,7 @@ class Transaction {
         return transaction
     }
 
-    static withdrawal(date, type, amount, balance) {
+    withdrawal(date, type, amount, balance) {
         const transaction = {
             date: date,
             type: type,

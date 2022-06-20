@@ -2,7 +2,7 @@ const BankAccount = require('./bank_account')
 
 class Statement {
 
-    static printStatement(transactions) {
+    printStatement(transactions) {
 
         const upperRow = '    Date    |  Amount  |   Type   |  Balance |\n----------------------------------------------'
         
