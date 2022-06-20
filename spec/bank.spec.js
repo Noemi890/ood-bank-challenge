@@ -48,13 +48,12 @@ describe('Bank Account', () => {
         expect(result).toEqual(expected)
     })
 
-    fit('get a bank statement', () => {
-        const statement = new Statement()
+    it('get a bank statement', () => {
         bank_account.credit('10.01.2012', 'credit', 1000)
         bank_account.credit('13.01.2012', 'credit', 2000)
         bank_account.debit('14.01.2012', 'debit', 500)
         const expected = '    Date    |  Amount  |   Type   |  Balance |\n----------------------------------------------\n 14.01.2012 |    £500  |  debit   |   £2500  |\n 13.01.2012 |   £2000  |  credit  |   £3000  |\n 10.01.2012 |   £1000  |  credit  |   £1000  |' 
-        const result = statement.getStatement(bank_account.getTransactions())
+        const result = bank_account.getStatement()
         expect(result).toEqual(expected)
     })
 })

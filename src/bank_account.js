@@ -1,4 +1,5 @@
 const Transaction = require('./transaction')
+const Statement = require('./statement')
 
 class BankAccount {
 
@@ -11,8 +12,8 @@ class BankAccount {
         return this.transactions
     }
 
-    getBalance() {
-        return this.balance
+    getStatement() {
+        return Statement.printStatement(this.getTransactions())
     }
 
     credit(date, type, amount) {
