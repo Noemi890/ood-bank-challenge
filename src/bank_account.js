@@ -17,15 +17,14 @@ class BankAccount {
         return statement.printStatement(this.getTransactions())
     }
 
-    credit(date, type, amount) {
+    transaction(date, type, amount) {
+        if (type === 'credit') {
         const transaction = new Transaction()
         this.balance += amount
         this.transactions.unshift(transaction.deposit(date, type, amount, this.balance)) 
         return this.balance
-    }
-
-    debit(date, type, amount) {
-        if (amount < this.balance) {
+        }
+        if (type === 'debit' && amount < this.balance) {
             const transaction = new Transaction()
             this.balance -= amount
             this.transactions.unshift(transaction.withdrawal(date, type, amount, this.balance))

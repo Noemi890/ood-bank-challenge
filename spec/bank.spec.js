@@ -11,25 +11,25 @@ describe('Bank Account', () => {
 
     it('Deposit money on bank account', () => {
         const expected = 1000
-        const result = bank_account.credit('10.01.2012', 'credit', 1000)
+        const result = bank_account.transaction('10.01.2012', 'credit', 1000)
         expect(result).toEqual(expected)
     })
 
     it('Withdraw money succesfully', () => {
-        bank_account.credit('10.01.2012', 'credit', 1000)
-        bank_account.credit('13.01.2012', 'credit', 2000)
+        bank_account.transaction('10.01.2012', 'credit', 1000)
+        bank_account.transaction('13.01.2012', 'credit', 2000)
         const expected = 2500
-        const result = bank_account.debit('14.01.2012', 'debit', 500)
+        const result = bank_account.transaction('14.01.2012', 'debit', 500)
         expect(result).toEqual(expected)
     })
 
     it('throw an error if balance is too low', () => {
-        expect(() => bank_account.debit('20.05.2022', 'debit', 2000)).toThrow(new Error('Balance too low'))
+        expect(() => bank_account.transaction('20.05.2022', 'debit', 2000)).toThrow(new Error('Balance too low'))
     })
 
     it('gets all the transactions', () => {
-        bank_account.credit('10.01.2012', 'credit', 1000)
-        bank_account.credit('13.01.2012', 'credit', 2000)
+        bank_account.transaction('10.01.2012', 'credit', 1000)
+        bank_account.transaction('13.01.2012', 'credit', 2000)
         const expected = [
             {
                 date: '13.01.2012',
@@ -49,10 +49,10 @@ describe('Bank Account', () => {
     })
 
     it('get a bank statement', () => {
-        bank_account.credit('10.01.2012', 'credit', 1000)
-        bank_account.credit('13.01.2012', 'credit', 2000)
-        bank_account.debit('14.01.2012', 'debit', 500)
-        const expected = '    Date    |  Amount  |   Type   |  Balance |\n----------------------------------------------\n 14.01.2012 |    £500  |  debit   |   £2500  |\n 13.01.2012 |   £2000  |  credit  |   £3000  |\n 10.01.2012 |   £1000  |  credit  |   £1000  |' 
+        bank_account.transaction('10.01.2012', 'credit', 1000)
+        bank_account.transaction('13.01.2012', 'credit', 2000)
+        bank_account.transaction('14.01.2012', 'debit', 500)
+        const expected = `    Date    || Credit  ||  Debit  || Balance \n 14.01.2012 ||         ||  £500   ||  £2500  \n 13.01.2012 ||  £2000  ||         ||  £3000  \n 10.01.2012 ||  £1000  ||         ||  £1000  ` 
         const result = bank_account.getStatement()
         expect(result).toEqual(expected)
     })

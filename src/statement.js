@@ -4,7 +4,7 @@ class Statement {
 
     printStatement(transactions) {
 
-        const upperRow = '    Date    |  Amount  |   Type   |  Balance |\n----------------------------------------------'
+        const upperRow = '    Date    || Credit  ||  Debit  || Balance '
         
         // console.log(upperRow)
         // console.log(transactions, balance)
@@ -12,10 +12,10 @@ class Statement {
 
         for (let i = 0; i < transactions.length; i++) {
             if (transactions[i].type === 'debit') {
-                statement += `\n ${transactions[i].date} |    £${transactions[i].amount}  |  ${transactions[i].type}   |   £${transactions[i].balance}  |`
+                statement += `\n ${transactions[i].date} ||         ||  £${transactions[i].amount}   ||  £${transactions[i].balance}  `
             }
             else {
-            statement += `\n ${transactions[i].date} |   £${transactions[i].amount}  |  ${transactions[i].type}  |   £${transactions[i].balance}  |`
+            statement += `\n ${transactions[i].date} ||  £${transactions[i].amount}  ||         ||  £${transactions[i].balance}  `
             }
         }
 
