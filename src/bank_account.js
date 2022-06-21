@@ -24,7 +24,7 @@ class BankAccount {
         this.transactions.unshift(transaction.deposit(date, type, amount, this.balance)) 
         return this.balance
         }
-        if (type === 'debit' && amount < this.balance) {
+        else if (type === 'debit' && amount < this.balance) {
             const transaction = new Transaction()
             this.balance -= amount
             this.transactions.unshift(transaction.withdrawal(date, type, amount, this.balance))
